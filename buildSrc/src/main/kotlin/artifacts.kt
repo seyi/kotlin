@@ -128,10 +128,11 @@ fun Project.publish(body: Upload.() -> Unit = {}): Upload {
 }
 
 fun Project.ideaPlugin(subdir: String = "lib", body: AbstractCopyTask.() -> Unit) {
+    val thisProject = this
     task<Copy>("idea-plugin") {
         body()
         into(File(rootProject.extra["ideaPluginDir"].toString(), subdir).path)
-        rename("-${java.util.regex.Pattern.quote(rootProject.extra["build.number"].toString())}", "")
+        rename("-${java.util.regex.Pattern.quote(thisProject.version.toString())}", "")
     }
 }
 
@@ -180,7 +181,7 @@ fun Jar.setupPublicJar(classifier: String = "", classifierDescr: String? = null)
         put("Built-By", project.rootProject.extra["manifest.impl.vendor"])
         put("Implementation-Vendor", project.rootProject.extra["manifest.impl.vendor"])
         put("Implementation-Title", "${project.description} ${classifierDescr ?: classifier}".trim())
-        put("Implementation-Version", project.rootProject.extra["build.number"])
+        put("Implementation-Version", project.rootProject.extra["buildNumber"])
     }
 //    from(project.configurations.getByName("build-version").files, action = { into("META-INF/") })
 }
