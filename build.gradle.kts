@@ -173,7 +173,6 @@ val gradlePluginProjects = listOf(
 
 apply {
     from("libraries/commonConfiguration.gradle")
-    from("libraries/gradlePluginsConfiguration.gradle")
     from("libraries/configureGradleTools.gradle")
 
     if (extra["isSonatypeRelease"] as? Boolean == true) {
