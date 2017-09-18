@@ -249,7 +249,7 @@ class CallCompleter(
 
         val errorData = InferenceErrorData.create(
                 candidateDescriptor, constraintSystem!!, valueArgumentsCheckingResult.argumentTypes,
-                receiverType, context.expectedType, context.call
+                receiverType, context.expectedType, context.call // todo expected type
         )
         tracing.typeInferenceFailed(context, errorData)
 
